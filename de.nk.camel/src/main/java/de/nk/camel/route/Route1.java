@@ -17,12 +17,24 @@ import de.nk.camel.model.MyCsvBean;
 @Component("route1")
 public class Route1 extends AbstractRoute {
 
+    private final String source;
+    private final String target;
+
+    public Route1() {
+        this("file://c:/temp?noop=true", "direct:camelRouter");
+    }
+
+    Route1(final String source, final String target) {
+        this.source = source;
+        this.target = target;
+    }
+
     @Override
     public void configureRoute() throws Exception {
 
         DataFormat bindy = new BindyCsvDataFormat("de.nk.camel.model");
 
-        from("file://c:/temp?noop=true")
+        from(source)
                 .log(body().toString())
                 .unmarshal(bindy)
                 .split(body())
@@ -35,7 +47,7 @@ public class Route1 extends AbstractRoute {
                         in.setBody(modelMap.get(MyCsvBean.class.getCanonicalName()));
                     }
                 })
-                .to("direct:camelRouter");
+                .to(target);
     }
 
 }
