@@ -19,6 +19,11 @@
 		<camel:contextScan />
 	</camel:camelContext>
 
+	<bean id="route1" class="de.nk.camel.route.Route1">
+		<property name="source" value="file://c:/temp?noop=true" />
+		<property name="target" value="direct:camelRouter" />
+	</bean>
+
 	<bean id="activemq" class="org.apache.activemq.camel.component.ActiveMQComponent">
 		<property name="brokerURL" value="tcp://localhost:61616" />
 	</bean>

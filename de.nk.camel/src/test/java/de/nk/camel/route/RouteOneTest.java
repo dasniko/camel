@@ -62,7 +62,10 @@ public class RouteOneTest extends AbstractJUnit4SpringContextTests {
         @Override
         @Bean
         public RouteBuilder route() {
-            return new Route1("direct:start", "mock:result");
+            final Route1 route = new Route1();
+            route.setSource("direct:start");
+            route.setTarget("mock:result");
+            return route;
         }
     }
 }
