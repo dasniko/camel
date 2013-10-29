@@ -1,3 +1,5 @@
+/* usage at command line: mysql -u root < create.sql */
+
 CREATE DATABASE `camel` /*!40100 CHARACTER SET utf8 COLLATE 'utf8_general_ci' */;
 
 USE `camel`;
